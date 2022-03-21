@@ -7,12 +7,13 @@ enum class blockType { NOTHING, AIR, DIRT, STONE_BLOCK, GRASS_BLOCK, STONE, WOOD
 
 struct structure {
     string name;
-    int x_size, y_size;
+    int x_size, y_size, y_offset;
     blockType* blocks;
-    structure(string cname, int x, int y, vector<blockType> cBlocks) {
+    structure(string cname, int x, int y, int y_off, vector<blockType> cBlocks) {
         name = cname;
         x_size = x;
         y_size = y;
+        y_offset = y_off;
         blocks = new blockType[x * y];
         for (int i = 0; i < x * y; i++)
             blocks[i] = cBlocks[i];
@@ -22,7 +23,7 @@ struct structure {
 void createDataBlock() {
     vector<structure> structures;
 
-    structures.push_back(structure("tree_1", 5, 12, {
+    structures.push_back(structure("tree_1", 5, 12, 0,{
             blockType::CANOPY, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING,
             blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING,
             blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING,
@@ -37,7 +38,7 @@ void createDataBlock() {
             blockType::AIR, blockType::WOOD, blockType::WOOD, blockType::WOOD, blockType::AIR,
     }));
 
-    structures.push_back(structure("tree_0", 5, 12, {
+    structures.push_back(structure("tree_0", 5, 12, 0,{
             blockType::CANOPY, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING,
             blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING,
             blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING, blockType::NOTHING,
@@ -52,7 +53,7 @@ void createDataBlock() {
             blockType::AIR, blockType::WOOD, blockType::WOOD, blockType::WOOD, blockType::AIR,
     }));
 
-    structures.push_back(structure("cactus_0", 2, 6, {
+    structures.push_back(structure("cactus_0", 2, 6, 1,{
             blockType::NOTHING, blockType::CACTUS,
             blockType::CACTUS, blockType::CACTUS,
             blockType::CACTUS, blockType::CACTUS,
@@ -61,7 +62,7 @@ void createDataBlock() {
             blockType::SAND, blockType::NOTHING,
     }));
 
-    structures.push_back(structure("cactus_1", 3, 8, {
+    structures.push_back(structure("cactus_1", 3, 8, 1,{
             blockType::NOTHING, blockType::CACTUS, blockType::NOTHING,
             blockType::CACTUS, blockType::CACTUS, blockType::NOTHING,
             blockType::CACTUS, blockType::CACTUS, blockType::CACTUS,
@@ -72,7 +73,7 @@ void createDataBlock() {
             blockType::NOTHING, blockType::SAND, blockType::NOTHING,
     }));
 
-    structures.push_back(structure("cactus_2", 2, 4, {
+    structures.push_back(structure("cactus_2", 2, 4, 1,{
             blockType::CACTUS, blockType::CACTUS,
             blockType::CACTUS, blockType::CACTUS,
             blockType::CACTUS, blockType::NOTHING,
@@ -94,9 +95,11 @@ void createDataBlock() {
         arr_section[1] = (char)(i.x_size & 0xff);
         arr_section[2] = (char)((i.y_size >> 8) & 0xff);
         arr_section[3] = (char)(i.y_size & 0xff);
+        arr_section[4] = (char)((i.y_offset >> 8) & 0xff);
+        arr_section[5] = (char)(i.y_offset & 0xff);
         for (int i2 = 0; i2 < i.x_size * i.y_size; i2++) {
-            arr_section[i2 * 2 + 4] = (char) (((int)i.blocks[i2] >> 8) & 0xff);
-            arr_section[i2 * 2 + 5] = (char) ((int)i.blocks[i2] & 0xff);
+            arr_section[i2 * 2 + 6] = (char) (((int)i.blocks[i2] >> 8) & 0xff);
+            arr_section[i2 * 2 + 7] = (char) ((int)i.blocks[i2] & 0xff);
         }
         structureFile.write(data, size);
     }
@@ -117,9 +120,11 @@ void createDataBlock() {
         arr_section[1] = (char)(i.x_size & 0xff);
         arr_section[2] = (char)((i.y_size >> 8) & 0xff);
         arr_section[3] = (char)(i.y_size & 0xff);
+        arr_section[4] = (char)((i.y_offset >> 8) & 0xff);
+        arr_section[5] = (char)(i.y_offset & 0xff);
         for (int i2 = 0; i2 < i.x_size * i.y_size; i2++) {
-            arr_section[i2 * 2 + 4] = (char) (((int)i.blocks[i2] >> 8) & 0xff);
-            arr_section[i2 * 2 + 5] = (char) ((int)i.blocks[i2] & 0xff);
+            arr_section[i2 * 2 + 6] = (char) (((int)i.blocks[i2] >> 8) & 0xff);
+            arr_section[i2 * 2 + 7] = (char) ((int)i.blocks[i2] & 0xff);
         }
         structureFile.write(data, size);
     }
