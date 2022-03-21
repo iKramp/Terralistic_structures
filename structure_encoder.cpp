@@ -52,28 +52,31 @@ void createDataBlock() {
             blockType::AIR, blockType::WOOD, blockType::WOOD, blockType::WOOD, blockType::AIR,
     }));
 
-    structures.push_back(structure("cactus_0", 2, 5, {
+    structures.push_back(structure("cactus_0", 2, 6, {
             blockType::NOTHING, blockType::CACTUS,
             blockType::CACTUS, blockType::CACTUS,
             blockType::CACTUS, blockType::CACTUS,
             blockType::CACTUS, blockType::NOTHING,
-            blockType::CACTUS, blockType::NOTHING
+            blockType::CACTUS, blockType::NOTHING,
+            blockType::SAND, blockType::NOTHING,
     }));
 
-    structures.push_back(structure("cactus_1", 3, 7, {
+    structures.push_back(structure("cactus_1", 3, 8, {
             blockType::NOTHING, blockType::CACTUS, blockType::NOTHING,
             blockType::CACTUS, blockType::CACTUS, blockType::NOTHING,
             blockType::CACTUS, blockType::CACTUS, blockType::CACTUS,
             blockType::CACTUS, blockType::CACTUS, blockType::CACTUS,
             blockType::NOTHING, blockType::CACTUS, blockType::CACTUS,
             blockType::NOTHING, blockType::CACTUS, blockType::NOTHING,
-            blockType::NOTHING, blockType::CACTUS, blockType::NOTHING
+            blockType::NOTHING, blockType::CACTUS, blockType::NOTHING,
+            blockType::NOTHING, blockType::SAND, blockType::NOTHING,
     }));
 
-    structures.push_back(structure("cactus_2", 2, 3, {
+    structures.push_back(structure("cactus_2", 2, 4, {
             blockType::CACTUS, blockType::CACTUS,
             blockType::CACTUS, blockType::CACTUS,
             blockType::CACTUS, blockType::NOTHING,
+            blockType::SAND, blockType::NOTHING,
     }));
     
 
